@@ -14,6 +14,11 @@ class activemq::params  {
       default => "/etc/activemq",
   }
 
+  $amq_instancedir = $operatingsystem ? {
+    /(?i-mx:ubuntu|debian)/ => "${amq_configdir}/instances-enabled",
+  }
+
+
   $amq_init_configfile = $operatingsystem ? {
       /(?i-mx:ubuntu|debian)/ => '/etc/default/activemq',
       default                 => '/etc/sysconfig/activemq',

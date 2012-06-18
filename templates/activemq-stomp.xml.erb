@@ -4,7 +4,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd http://activemq.apache.org/camel/schema/spring http://activemq.apache.org/camel/schema/spring/camel-spring.xsd">
 
-<broker xmlns="http://activemq.apache.org/schema/core" brokerName="localhost" useJmx="true" dataDirectory="<%= amq_datadir %>" destroyApplicationContextOnStop="true">
+<broker xmlns="http://activemq.apache.org/schema/core" brokerName="localhost" useJmx="true" dataDirectory="<%= scope.lookupvar('activemq::params::amq_datadir') %>" destroyApplicationContextOnStop="true">
         <managementContext>
             <managementContext createConnector="false"/>
         </managementContext>
@@ -13,8 +13,8 @@
           <statisticsBrokerPlugin/>
           <simpleAuthenticationPlugin>
             <users>
-              <authenticationUser username="<%= stomp_user %>" password="<%= stomp_passwd %>" groups="<%= stomp_user %>,everyone"/>
-              <authenticationUser username="<%= stomp_admin_user %>" password="<%= stomp_admin_passwd %>" groups="<%= stomp_user %>,admins,everyone"/>
+              <authenticationUser username="<%= template_options["stomp_user"] %>" password="<%= template_options["stomp_password"] %>" groups="<%= template_options["stomp_user"] %>,everyone"/>
+              <authenticationUser username="<%= template_options["stomp_admin_user"] %>" password="<%= template_options["stomp_admin_password"] %>" groups="<%= template_options["stomp_user"] %>,admins,everyone"/>
             </users>
           </simpleAuthenticationPlugin>
           <authorizationPlugin>
@@ -23,8 +23,8 @@
                 <authorizationEntries>
                   <authorizationEntry queue=">" write="admins" read="admins" admin="admins" />
                   <authorizationEntry topic=">" write="admins" read="admins" admin="admins" />
-                  <authorizationEntry queue="mcollective.>" write="<%= stomp_user %>" read="<%= stomp_user %>" admin="<%= stomp_user %>" />
-                  <authorizationEntry topic="mcollective.>" write="<%= stomp_user %>" read="<%= stomp_user %>" admin="<%= stomp_user %>" />
+                  <authorizationEntry queue="mcollective.>" write="<%= template_options["stomp_user"] %>" read="<%= template_options["stomp_user"] %>" admin="<%= template_options["stomp_user"] %>" />
+                  <authorizationEntry topic="mcollective.>" write="<%= template_options["stomp_user"] %>" read="<%= template_options["stomp_user"] %>" admin="<%= template_options["stomp_user"] %>" />
                   <authorizationEntry topic="ActiveMQ.Advisory.>" read="everyone" write="everyone" admin="everyone"/>
                 </authorizationEntries>
               </authorizationMap>
@@ -47,7 +47,7 @@
         </systemUsage>
         <transportConnectors>
             <transportConnector name="openwire" uri="tcp://0.0.0.0:6166"/>
-            <transportConnector name="stomp+nio" uri="stomp+nio://0.0.0.0:<%= stomp_port %>"/>
+            <transportConnector name="stomp+nio" uri="stomp+nio://0.0.0.0:<%= template_options["stomp_port"] %>"/>
         </transportConnectors>
     </broker>
 </beans>

@@ -6,6 +6,5 @@ class activemq::service {
     hasrestart => true,
     hasstatus  => true,
     require    => Class['activemq::pkg'],
-    subscribe  => Class['activemq::config'],
   }
 }
