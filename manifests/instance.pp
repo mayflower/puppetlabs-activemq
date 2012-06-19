@@ -6,6 +6,7 @@ define activemq::instance($template, $template_options = {}) {
   $instance_dir     = "${activemq::params::amq_instancedir}/${name}"
   $instance_xml     = "${activemq::params::amq_instancedir}/${name}/activemq.xml"
   $instance_logging = "${activemq::params::amq_instancedir}/${name}/log4j.properties"
+  $instance_options = "${activemq::params::amq_instancedir}/${name}/options"
 
   file { $instance_dir:
     ensure => directory,
@@ -28,6 +29,18 @@ define activemq::instance($template, $template_options = {}) {
   file { $instance_logging:
     ensure  => file,
     source  => 'puppet:///modules/activemq/log4j.properties',
+    mode    => '0644',
+    owner   => 'root',
+    group   => 'root',
+    require => Class['activemq::pkg'],
+    notify  => Class['activemq::service'],
+  }
+
+  # REVIEW: This properties file is hardcoded, but it might be better to
+  # allow logging injection
+  file { $instance_options:
+    ensure  => file,
+    source  => 'puppet:///modules/activemq/options',
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
