@@ -6,4 +6,13 @@ class activemq::pkg(
     ensure   => present,
     provider => $pkg_provider,
   }
+
+  # Not sure if this belongs here.
+  file { '/var/log/activemq':
+    ensure => directory,
+    owner  => activemq,
+    group  => activemq,
+    mode   => '0750',
+    before => Service['activemq'],
+  }
 }
