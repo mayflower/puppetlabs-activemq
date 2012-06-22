@@ -68,7 +68,7 @@ define activemq::instance($ssl = false) {
     concat::fragment { "${name}-ssl":
       target  => $instance_xml,
       content => template('activemq/activemq.xml/ssl.xml.erb'),
-      order   => '050',
+      order   => '505',
     }
   }
 }

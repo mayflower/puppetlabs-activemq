@@ -6,7 +6,7 @@ class activemq::instance::stomp {
 
   activemq::instance {'stomp': ssl => true}
 
-  # Management context. WHAT DOES THIS DO!?!?!?!?
+  # Management context.
   concat::fragment { 'stomp-management':
     content => template('activemq/instances/stomp/management.xml.erb'),
     order   => '020',
