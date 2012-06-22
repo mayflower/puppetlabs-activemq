@@ -6,7 +6,7 @@ define activemq::instance::stomp::authorization($type, $content, $read, $write, 
   $data = inline_template("                  <authorizationEntry <%= @type %>=\"<%= content %>\" write=\"<%= write %>\" read=\"<%= @read %>\" admin=\"<%= admin %>\" />\n")
 
   concat::fragment { "${target_instance}-authorization-${name}":
-    content => "${data}\n",
+    content => $data,
     order   => '350',
     target  => $instance_xml,
   }

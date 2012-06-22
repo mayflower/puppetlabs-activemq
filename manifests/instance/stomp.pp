@@ -12,7 +12,7 @@ class activemq::instance::stomp {
   # ORDER 100 - 500
   ##############################################################################
   concat::fragment { 'stomp-begin-plugins':
-    content => '        <plugins>\n',
+    content => "        <plugins>\n",
     order   => '100',
     target  => $instance_xml,
   }
@@ -21,7 +21,7 @@ class activemq::instance::stomp {
   # Random things
   # ORDER 101 - 200
   concat::fragment { 'stomp-plugin-statistics':
-    content => '          <statisticsBrokerPlugin/>',
+    content => "          <statisticsBrokerPlugin/>\n",
     order   => '110',
     target  => $instance_xml,
   }
@@ -65,7 +65,7 @@ class activemq::instance::stomp {
   ######################################
 
   concat::fragment { 'stomp-end-plugins':
-    content => '        </plugins>\n',
+    content => "        </plugins>\n",
     order  => '500',
     target => $instance_xml,
   }
@@ -91,13 +91,13 @@ class activemq::instance::stomp {
   # ORDER 700 - 800
   ######################################
   concat::fragment { 'stomp-transportconnectors-begin':
-    content => '        <transportConnectors>\n',
+    content => "        <transportConnectors>\n",
     order   => '700',
     target  => $instance_xml,
   }
 
   concat::fragment { 'stomp-transportconnectors-end':
-    content => '        </transportConnectors>\n',
+    content => "        </transportConnectors>\n",
     order   => '799',
     target  => $instance_xml,
   }
