@@ -1,6 +1,7 @@
 # Generic activemq instance define.
 define activemq::instance($template, $template_options = {}) {
 
+  include activemq
   include activemq::params
 
   $instance_dir     = "${activemq::params::amq_instancedir}/${name}"
