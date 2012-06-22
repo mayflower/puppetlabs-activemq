@@ -8,7 +8,7 @@ class activemq::pkg(
   }
 
   # Not sure if this belongs here.
-  file { '/var/log/activemq':
+  file { $activemq::params::amq_logdir:
     ensure => directory,
     owner  => activemq,
     group  => activemq,

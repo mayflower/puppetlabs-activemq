@@ -25,11 +25,9 @@ define activemq::instance($template, $template_options = {}) {
     notify  => Class['activemq::service'],
   }
 
-  # REVIEW: This properties file is hardcoded, but it might be better to
-  # allow logging injection
   file { $instance_logging:
     ensure  => file,
-    source  => 'puppet:///modules/activemq/log4j.properties',
+    content => template('activemq/log4j.properties.erb'),
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
@@ -37,8 +35,6 @@ define activemq::instance($template, $template_options = {}) {
     notify  => Class['activemq::service'],
   }
 
-  # REVIEW: This properties file is hardcoded, but it might be better to
-  # allow logging injection
   file { $instance_options:
     ensure  => file,
     source  => 'puppet:///modules/activemq/options',
