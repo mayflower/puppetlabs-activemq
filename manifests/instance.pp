@@ -1,5 +1,5 @@
 # Generic activemq instance define.
-define activemq::instance {
+define activemq::instance($ssl = false) {
 
   include activemq
   include activemq::params
@@ -60,5 +60,15 @@ define activemq::instance {
     target  => $instance_xml,
     content => template('activemq/activemq.xml/footer.xml.erb'),
     order   => '999',
+  }
+
+  if $ssl {
+    include activemq::instance::ssl
+
+    concat::fragment { "${name}-ssl":
+      target  => $instance_xml,
+      content => template('activemq/activemq.xml/ssl.xml.erb'),
+      order   => '050',
+    }
   }
 }

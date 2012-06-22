@@ -4,7 +4,14 @@ class activemq::instance::stomp {
 
   $instance_xml = "${activemq::params::amq_instancedir}/stomp/activemq.xml"
 
-  activemq::instance {'stomp': }
+  activemq::instance {'stomp': ssl => true}
+
+  # Management context. WHAT DOES THIS DO!?!?!?!?
+  concat::fragment { 'stomp-management':
+    content => template('activemq/instances/stomp/management.xml.erb'),
+    order   => '020',
+    target  => $instance_xml,
+  }
 
   ##############################################################################
   # BEGIN: plugins
@@ -82,13 +89,6 @@ class activemq::instance::stomp {
   concat::fragment { 'stomp-systemusage':
     content => template('activemq/instances/stomp/systemusage.xml.erb'),
     order   => '510',
-    target  => $instance_xml,
-  }
-
-  # Management context. WHAT DOES THIS DO!?!?!?!?
-  concat::fragment { 'stomp-management':
-    content => template('activemq/instances/stomp/management.xml.erb'),
-    order   => '520',
     target  => $instance_xml,
   }
 
