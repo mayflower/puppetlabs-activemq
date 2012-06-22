@@ -1,5 +1,7 @@
 class activemq::instance::stomp {
 
+  include activemq::params
+
   $instance_xml = "${activemq::params::amq_instancedir}/stomp/activemq.xml"
 
   activemq::instance {'stomp': }

@@ -1,5 +1,7 @@
 define activemq::instance::stomp::protocol($protocol_name, $uri, $target_instance) {
 
+  include activemq::params
+
   $instance_xml = "${activemq::params::amq_instancedir}/${target_instance}/activemq.xml"
   $data = inline_template("            <transportConnector name=\"<%= protocol_name %>\" uri=\"<%= @uri %>\"/>\n")
 
