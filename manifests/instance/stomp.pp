@@ -78,7 +78,7 @@ class activemq::instance::stomp {
   ##############################################################################
 
   # Limit system usage
-  concat::fragment { 'stomp-systemusage',
+  concat::fragment { 'stomp-systemusage':
     content => template('activemq/instances/stomp/systemusage.xml.erb'),
     order   => '510',
     target  => $instance_xml,
@@ -88,14 +88,14 @@ class activemq::instance::stomp {
   # BEGIN: Transport connectors
   # ORDER 700 - 800
   ######################################
-  concat::fragment { 'stomp-transportconnectors-begin',
-    content => '        <transportConnectors>\n'
+  concat::fragment { 'stomp-transportconnectors-begin':
+    content => '        <transportConnectors>\n',
     order   => '700',
     target  => $instance_xml,
   }
 
-  concat::fragment { 'stomp-transportconnectors-end',
-    content => '        </transportConnectors>\n'
+  concat::fragment { 'stomp-transportconnectors-end':
+    content => '        </transportConnectors>\n',
     order   => '799',
     target  => $instance_xml,
   }
