@@ -1,11 +1,5 @@
 class activemq::params  {
 
-  $stomp_user         = 'mcollective'
-  $stomp_passwd       = 'marionette'
-  $stomp_port         = '61613'
-  $stomp_admin_user   = 'admin'
-  $stomp_admin_passwd = 'admin'
-
   $amq_configfile = $operatingsystem ? {
       default => "/etc/activemq/activemq.xml",
   }
