@@ -6,7 +6,6 @@ class activemq::instance::stomp {
 
   activemq::instance {'stomp': }
 
-
   ##############################################################################
   # BEGIN: plugins
   # ORDER 100 - 500
@@ -83,6 +82,13 @@ class activemq::instance::stomp {
   concat::fragment { 'stomp-systemusage':
     content => template('activemq/instances/stomp/systemusage.xml.erb'),
     order   => '510',
+    target  => $instance_xml,
+  }
+
+  # Management context. WHAT DOES THIS DO!?!?!?!?
+  concat::fragment { 'stomp-management':
+    content => template('activemq/instances/stomp/management.xml.erb'),
+    order   => '520',
     target  => $instance_xml,
   }
 
