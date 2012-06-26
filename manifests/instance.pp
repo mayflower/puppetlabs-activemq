@@ -50,7 +50,7 @@ define activemq::instance($ssl = false) {
   # defines.
 
   concat { $instance_xml:
-    mode    => '0644',
+    mode    => '0640',
     owner   => 'root',
     group   => 'root',
     require => Class['activemq::pkg'],
