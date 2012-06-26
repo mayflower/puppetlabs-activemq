@@ -43,7 +43,7 @@ define activemq::instance::sections($ssl = false) {
   # ORDER: 020
   #
   concat::fragment { "${name}-management":
-    content => template('activemq/instances/stomp/management.xml.erb'),
+    content => template('activemq/activemq.xml/management.xml.erb'),
     order   => '020',
     target  => $instance_xml,
   }
@@ -79,11 +79,11 @@ define activemq::instance::sections($ssl = false) {
   #
   concat::fragment {
     "${name}-plugin-begin-authn":
-      content => template('activemq/instances/stomp/plugin-begin-authn.xml.erb'),
+      content => template('activemq/activemq.xml/plugin-begin-authn.xml.erb'),
       order   => '201',
       target  => $instance_xml;
     "${name}-plugin-end-authn":
-      content => template('activemq/instances/stomp/plugin-end-authn.xml.erb'),
+      content => template('activemq/activemq.xml/plugin-end-authn.xml.erb'),
       order   => '300',
       target  => $instance_xml;
   }
@@ -94,11 +94,11 @@ define activemq::instance::sections($ssl = false) {
   #
   concat::fragment {
     "${name}-plugin-begin-authz":
-      content => template('activemq/instances/stomp/plugin-begin-authz.xml.erb'),
+      content => template('activemq/activemq.xml/plugin-begin-authz.xml.erb'),
       order   => '301',
       target  => $instance_xml;
     "${name}-plugin-end-authz":
-      content => template('activemq/instances/stomp/plugin-end-authz.xml.erb'),
+      content => template('activemq/activemq.xml/plugin-end-authz.xml.erb'),
       order   => '400',
       target  => $instance_xml;
   }
@@ -120,7 +120,7 @@ define activemq::instance::sections($ssl = false) {
   # ORDER 510
   #
   concat::fragment { "${name}-systemusage":
-    content => template('activemq/instances/stomp/systemusage.xml.erb'),
+    content => template('activemq/activemq.xml/systemusage.xml.erb'),
     order   => '510',
     target  => $instance_xml,
   }
