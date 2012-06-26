@@ -2,7 +2,7 @@ class activemq::ssl {
 
   include activemq::params
 
-  $passwd = genpass({store_key => 'activemq_store'})
+  $passwd = hiera('activemq::ssl::password')
 
   java_ks { 'puppetca:truststore':
     ensure       => latest,
