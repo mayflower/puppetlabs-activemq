@@ -4,6 +4,10 @@ define activemq::instance($ssl = false) {
   include activemq
   include activemq::params
 
+  if $ssl { include activemq::ssl }
+
+  activemq::instance::sections { $name: ssl => $ssl }
+
   $instance_dir     = "${activemq::params::amq_instancedir}/${name}"
   $instance_xml     = "${instance_dir}/activemq.xml"
   $instance_logging = "${instance_dir}/log4j.properties"
@@ -62,13 +66,4 @@ define activemq::instance($ssl = false) {
     order   => '999',
   }
 
-  if $ssl {
-    include activemq::instance::ssl
-
-    concat::fragment { "${name}-ssl":
-      target  => $instance_xml,
-      content => template('activemq/activemq.xml/ssl.xml.erb'),
-      order   => '505',
-    }
-  }
 }

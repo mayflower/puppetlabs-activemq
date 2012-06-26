@@ -1,4 +1,4 @@
-class activemq::instance::ssl {
+class activemq::ssl {
 
   include activemq::params
 
