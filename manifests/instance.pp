@@ -52,7 +52,7 @@ define activemq::instance($ssl = false) {
   concat { $instance_xml:
     mode    => '0640',
     owner   => 'root',
-    group   => 'root',
+    group   => 'activemq',
     require => Class['activemq::pkg'],
     notify  => Class['activemq::service'],
   }
