@@ -1,4 +1,4 @@
-define activemq::instance::stomp::authorization($type, $content, $read, $write, $admin, $target_instance) {
+define activemq::instance::authorization($type, $content, $read, $write, $admin, $target_instance) {
 
   include activemq::params
 

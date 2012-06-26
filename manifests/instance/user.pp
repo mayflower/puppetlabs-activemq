@@ -1,4 +1,4 @@
-define activemq::instance::stomp::user($username, $password, $groups, $target_instance) {
+define activemq::instance::user($username, $password, $groups, $target_instance) {
 
   include activemq::params
 

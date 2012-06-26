@@ -1,4 +1,4 @@
-define activemq::instance::stomp::protocol($protocol_name, $uri, $target_instance) {
+define activemq::instance::protocol($protocol_name, $uri, $target_instance) {
 
   include activemq::params
 
