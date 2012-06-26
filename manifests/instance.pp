@@ -1,4 +1,9 @@
-# Generic activemq instance define.
+# = activemq::instance
+#
+# == Description
+#
+# Creates an activemq instance for debian systems.
+#
 define activemq::instance($ssl = false) {
 
   include activemq
