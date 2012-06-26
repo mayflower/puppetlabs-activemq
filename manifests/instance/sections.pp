@@ -1,4 +1,4 @@
-class activemq::instance::stomp {
+class activemq::instance::sections {
 
   include activemq::params
 
