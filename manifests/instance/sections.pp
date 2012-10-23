@@ -68,10 +68,10 @@ define activemq::instance::sections($ssl = false) {
   concat::fragment {
     "${name}-begin-plugins":
       content => "        <plugins>\n",
-      order   => '100',
+      order   => '100';
     "${name}-end-plugins":
       content => "        </plugins>\n",
-      order  => '500',
+      order  => '500';
   }
 
   ######################################
@@ -90,10 +90,10 @@ define activemq::instance::sections($ssl = false) {
   concat::fragment {
     "${name}-plugin-begin-authn":
       content => template('activemq/activemq.xml/plugin-begin-authn.xml.erb'),
-      order   => '201',
+      order   => '201';
     "${name}-plugin-end-authn":
       content => template('activemq/activemq.xml/plugin-end-authn.xml.erb'),
-      order   => '300',
+      order   => '300';
   }
 
   ######################################
@@ -103,10 +103,10 @@ define activemq::instance::sections($ssl = false) {
   concat::fragment {
     "${name}-plugin-begin-authz":
       content => template('activemq/activemq.xml/plugin-begin-authz.xml.erb'),
-      order   => '301',
+      order   => '301';
     "${name}-plugin-end-authz":
       content => template('activemq/activemq.xml/plugin-end-authz.xml.erb'),
-      order   => '400',
+      order   => '400';
   }
 
   if $ssl {
@@ -136,9 +136,9 @@ define activemq::instance::sections($ssl = false) {
   concat::fragment {
     "${name}-transportconnectors-begin":
       content => "        <transportConnectors>\n",
-      order   => '700',
+      order   => '700';
     "${name}-transportconnectors-end":
       content => "        </transportConnectors>\n",
-      order   => '799',
+      order   => '799';
   }
 }
