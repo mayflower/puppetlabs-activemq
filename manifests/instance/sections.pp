@@ -39,6 +39,10 @@ define activemq::instance::sections($ssl = false) {
 
   $instance_xml = "${activemq::params::amq_instancedir}/${name}/activemq.xml"
 
+  Concat::Fragment {
+    target  => $instance_xml,
+  }
+
   ######################################
   # Destination policy for garbage collection.
   # ORDER: 020
@@ -46,7 +50,6 @@ define activemq::instance::sections($ssl = false) {
   concat::fragment { "${name}-destinationpolicy":
     content => template('activemq/activemq.xml/destinationpolicy.xml.erb'),
     order   => '010',
-    target  => $instance_xml,
   }
 
   ######################################
@@ -56,7 +59,6 @@ define activemq::instance::sections($ssl = false) {
   concat::fragment { "${name}-management":
     content => template('activemq/activemq.xml/management.xml.erb'),
     order   => '020',
-    target  => $instance_xml,
   }
 
   ##############################################################################
@@ -67,11 +69,9 @@ define activemq::instance::sections($ssl = false) {
     "${name}-begin-plugins":
       content => "        <plugins>\n",
       order   => '100',
-      target  => $instance_xml;
     "${name}-end-plugins":
       content => "        </plugins>\n",
       order  => '500',
-      target => $instance_xml;
   }
 
   ######################################
@@ -81,7 +81,6 @@ define activemq::instance::sections($ssl = false) {
   concat::fragment { "${name}-plugin-statistics":
     content => "          <statisticsBrokerPlugin/>\n",
     order   => '110',
-    target  => $instance_xml,
   }
 
   ######################################
@@ -92,11 +91,9 @@ define activemq::instance::sections($ssl = false) {
     "${name}-plugin-begin-authn":
       content => template('activemq/activemq.xml/plugin-begin-authn.xml.erb'),
       order   => '201',
-      target  => $instance_xml;
     "${name}-plugin-end-authn":
       content => template('activemq/activemq.xml/plugin-end-authn.xml.erb'),
       order   => '300',
-      target  => $instance_xml;
   }
 
   ######################################
@@ -107,11 +104,9 @@ define activemq::instance::sections($ssl = false) {
     "${name}-plugin-begin-authz":
       content => template('activemq/activemq.xml/plugin-begin-authz.xml.erb'),
       order   => '301',
-      target  => $instance_xml;
     "${name}-plugin-end-authz":
       content => template('activemq/activemq.xml/plugin-end-authz.xml.erb'),
       order   => '400',
-      target  => $instance_xml;
   }
 
   if $ssl {
@@ -120,7 +115,6 @@ define activemq::instance::sections($ssl = false) {
     # ORDER 505
     #
     concat::fragment { "${name}-ssl":
-      target  => $instance_xml,
       content => template('activemq/activemq.xml/ssl.xml.erb'),
       order   => '505',
     }
@@ -133,7 +127,6 @@ define activemq::instance::sections($ssl = false) {
   concat::fragment { "${name}-systemusage":
     content => template('activemq/activemq.xml/systemusage.xml.erb'),
     order   => '510',
-    target  => $instance_xml,
   }
 
   ######################################
@@ -144,10 +137,8 @@ define activemq::instance::sections($ssl = false) {
     "${name}-transportconnectors-begin":
       content => "        <transportConnectors>\n",
       order   => '700',
-      target  => $instance_xml;
     "${name}-transportconnectors-end":
       content => "        </transportConnectors>\n",
       order   => '799',
-      target  => $instance_xml;
   }
 }
