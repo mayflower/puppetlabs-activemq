@@ -6,6 +6,7 @@
 #
 # == Ordering:
 #
+# * Destination policy: 010
 # * Management context: 020
 # * Plugins: 100 - 500
 #   * generic plugins: 101 - 200
@@ -37,6 +38,16 @@ define activemq::instance::sections($ssl = false) {
   include activemq::params
 
   $instance_xml = "${activemq::params::amq_instancedir}/${name}/activemq.xml"
+
+  ######################################
+  # Destination policy for garbage collection.
+  # ORDER: 020
+  #
+  concat::fragment { "${name}-destinationpolicy":
+    content => template('activemq/activemq.xml/destinationpolicy.xml.erb'),
+    order   => '010',
+    target  => $instance_xml,
+  }
 
   ######################################
   # Management context.
