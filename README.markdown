@@ -113,3 +113,4 @@ Requirements
 ------------
 
   * puppet-concat: https://github.com/ripienaar/puppet-concat
+  * puppetlabs-stdlib: https://github.com/puppetlabs/puppetlabs-stdlib
