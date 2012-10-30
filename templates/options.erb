@@ -1,6 +1,8 @@
 STARTTIME=<%= starttime %>
 DIETIME=<%= dietime %>
 
+# Clear any previously set options
+ACTIVEMQ_OPTS=""
 <% if prefer_ipv4 -%>
 ACTIVEMQ_OPTS="${ACTIVEMQ_OPTS} -Djava.net.preferIPv4Stack=true"
 <% end -%>
