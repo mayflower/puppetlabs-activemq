@@ -1,0 +1,11 @@
+STARTTIME=<%= starttime %>
+DIETIME=<%= dietime %>
+
+<% if prefer_ipv4 -%>
+ACTIVEMQ_OPTS="${ACTIVEMQ_OPTS} -Djava.net.preferIPv4Stack=true"
+<% end -%>
+ACTIVEMQ_OPTS="${ACTIVEMQ_OPTS} -Xms<%= min_stacksize %> -Xmx<%= max_stacksize %>"
+<% if @activemq_opts -%>
+ACTIVEMQ_OPTS="${ACTIVEMQ_OPTS} <%= @activemq_opts %>"
+<% end -%>
+export ACTIVEMQ_OPTS

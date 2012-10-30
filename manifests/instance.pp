@@ -4,7 +4,15 @@
 #
 # Creates an activemq instance for debian systems.
 #
-define activemq::instance($ssl = false) {
+define activemq::instance(
+  $ssl = false,
+  $min_stacksize = '256M',
+  $max_stacksize = '512M',
+  $starttime     = '10',
+  $dietime       = '10',
+  $prefer_ipv4   = true,
+  $activemq_opts = undef,
+) {
 
   include activemq
   include activemq::params
@@ -36,7 +44,7 @@ define activemq::instance($ssl = false) {
 
   file { $instance_options:
     ensure  => file,
-    source  => 'puppet:///modules/activemq/options',
+    content => template('activemq/options.erb'),
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
@@ -46,7 +54,7 @@ define activemq::instance($ssl = false) {
 
   # ---
   # Build our activemq.xml out of itsy bitsy little chunks so that
-  # functionality like users and protocols can be broken out into other 
+  # functionality like users and protocols can be broken out into other
   # defines.
 
   concat { $instance_xml:
