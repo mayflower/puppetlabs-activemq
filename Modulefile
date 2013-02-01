@@ -10,3 +10,4 @@ project_page 'https://github.com/puppetlabs-operations/puppetlabs-activemq'
 
 dependency 'ripienaar/concat',   '>= 0.2.0'
 dependency 'puppetlabs/java_ks', '>= 0.0.6'
+dependency 'puppetlabs/stdlib',  '>= 2.3.0'
